@@ -119,7 +119,7 @@ namespace LD38Runner {
     }
 
     void rotateLeft() {
-      spriteHolder.transform.Rotate (Vector3.forward * 5);
+      //spriteHolder.transform.Rotate (Vector3.forward * 5);
     }
   }
 }
