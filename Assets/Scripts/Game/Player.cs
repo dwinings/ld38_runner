@@ -24,7 +24,7 @@ namespace LD38Runner {
         var angle = Math.Atan2(incidence.y, incidence.x);
         if (angle > NEG_THREE_PI_OVER_4 && angle < NEG_PI_OVER_4 ) {
           if (Mathf.Abs(transform.position.y - overlapping[i].transform.position.y) > 0.0001f) {
-            transform.position = new Vector2(transform.position.x, overlapping[i].transform.position.y + 1);
+            transform.position = new Vector2(transform.position.x, overlapping[i].transform.position.y + 10);
           }
           return true;
         }
