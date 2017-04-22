@@ -31,6 +31,7 @@ namespace LD38Runner {
 
     public void endMePlease() {
       sfxAudioSource.PlayOneShot(deathSound);
+      _levelSpeed = 0f;
     }
   }
 }
