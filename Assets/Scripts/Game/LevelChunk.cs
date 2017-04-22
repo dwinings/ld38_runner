@@ -15,7 +15,7 @@ namespace LD38Runner {
     public void PositionAsGameStart() {
       transform.position = new Vector3(
         -1*width + PLAYER_DISPLAY_OFFSET + starting_x,
-        height - start_height + 1,
+        height - start_height + 2,
         0f
       );
     }

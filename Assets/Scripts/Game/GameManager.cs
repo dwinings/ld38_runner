@@ -11,7 +11,7 @@ namespace LD38Runner {
     public LevelChunkList chunkList;
     public GameObject player;
 
-    public float gravity = 0.05f;
+    public float gravity;
 
     private float _levelSpeed = 0.2f;
     public float levelSpeed {
@@ -20,6 +20,8 @@ namespace LD38Runner {
 
     // Use this for initialization
     void Start() {
+      musicAudioSource.Play();
+
       if (!_instance) {
         _instance = this;
       } else {

@@ -10,7 +10,9 @@ namespace LD38Runner {
     private BoxCollider2D[] overlapping = new BoxCollider2D[16];
     private ContactFilter2D filter = new ContactFilter2D();
 
-    public float deathThreshold = -80f;
+    public float deathThreshold = -100f;
+    public GameObject spriteHolder;
+
     private const float NEG_THREE_PI_OVER_4 = -3f * Mathf.PI / 4f;
     private const float NEG_PI_OVER_4 = Mathf.PI / -4f;
     private const float THREE_PI_OVER_4 = 3f * Mathf.PI / 4f;
@@ -19,7 +21,7 @@ namespace LD38Runner {
     private bool isCeilinged = false;
     private bool isWalled = false;
 
-    void performCollision() {
+    private void performCollision() {
       int hits = coll.OverlapCollider(filter, overlapping);
       Vector2 incidence;
       double angle;
@@ -66,7 +68,7 @@ namespace LD38Runner {
         transform.position = new Vector2(transform.position.x, ground.position.y + 1);
       }
       velocity = 0;
-      MaybeJump();
+      maybeJump();
     }
 
     private void onCeiling(Transform ceiling) {
@@ -91,6 +93,7 @@ namespace LD38Runner {
       isGrounded = false;
       isCeilinged = false;
       isWalled = false;
+      rotateLeft ();
 
       velocity -= GameManager._instance.gravity;
       velocity = Mathf.Clamp(velocity, -1, 9999);
@@ -109,10 +112,14 @@ namespace LD38Runner {
       Destroy(this.gameObject);
     }
 
-    private void MaybeJump() {
+    private void maybeJump() {
       if (Input.GetKeyDown(KeyCode.Space)) {
         velocity += jumpStrength;
       }
+    }
+
+    void rotateLeft() {
+      spriteHolder.transform.Rotate (Vector3.forward * 5);
     }
   }
 }
