@@ -11,6 +11,8 @@ namespace LD38Runner {
     private ContactFilter2D filter = new ContactFilter2D();
 
     public float deathThreshold = -100f;
+    public GameObject sprite;
+
     private const float NEG_THREE_PI_OVER_4 = -3f * Mathf.PI / 4f;
     private const float NEG_PI_OVER_4 = Mathf.PI / -4f;
     private const float THREE_PI_OVER_4 = 3f * Mathf.PI / 4f;
@@ -40,6 +42,7 @@ namespace LD38Runner {
 
     // Update is called once per frame
     void Update() {
+      RotateLeft ();
 
       if (isGrounded()) {
         velocity = 0;
@@ -59,6 +62,10 @@ namespace LD38Runner {
       if (isGrounded() && Input.GetKeyDown(KeyCode.Space)) {
         velocity += jumpStrength;
       }
+    }
+
+    void RotateLeft() {
+      sprite.transform.Rotate (Vector3.forward * 5);
     }
   }
 }
