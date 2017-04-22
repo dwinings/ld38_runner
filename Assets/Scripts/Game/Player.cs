@@ -5,7 +5,7 @@ namespace LD38Runner {
   [RequireComponent(typeof(BoxCollider2D))]
   public class Player : MonoBehaviour {
     public float jumpStrength;
-    private float velocity = 0f;
+    public float velocity = 0f;
     private BoxCollider2D coll;
     private BoxCollider2D[] overlapping = new BoxCollider2D[16];
     private ContactFilter2D filter = new ContactFilter2D();
@@ -73,7 +73,7 @@ namespace LD38Runner {
       if (Mathf.Abs(transform.position.y + 1f - ceiling.position.y) > 0.0001f) {
         transform.position = new Vector2(transform.position.x, ceiling.position.y - 1);
       }
-      velocity = 0;
+      velocity = Mathf.Min(velocity, 0);
     }
 
     private void onWall(Transform wall) {
@@ -93,6 +93,7 @@ namespace LD38Runner {
       isWalled = false;
 
       velocity -= GameManager._instance.gravity;
+      velocity = Mathf.Clamp(velocity, -1, 9999);
       performCollision();
       transform.Translate(0, velocity, 0);
 
@@ -103,6 +104,8 @@ namespace LD38Runner {
 
     private void die() {
       GameManager._instance.endMePlease();
+      // Pls no destroy camera ty
+      GetComponentInChildren<Camera>().gameObject.transform.SetParent(null, true);
       Destroy(this.gameObject);
     }
 

@@ -8,6 +8,8 @@ namespace LD38Runner {
     public AudioSource musicAudioSource;
     public AudioSource sfxAudioSource;
     public AudioClip deathSound;
+    public LevelChunkList chunkList;
+    public GameObject player;
 
     public float gravity = 0.05f;
 
@@ -23,6 +25,10 @@ namespace LD38Runner {
       } else {
         GameObject.DestroyImmediate(this);
       }
+
+      var chunk = Instantiate(chunkList.levelChunks[0]);
+      player = GameObject.FindGameObjectWithTag("Player");
+      chunk.GetComponent<LevelChunk>().PositionAsGameStart();
     }
 
     void Update() {
