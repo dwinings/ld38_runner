@@ -14,7 +14,7 @@ namespace LD38Runner {
     // This one is off camera to the right (+x axis)
     private LevelChunk nextChunk;
     private LevelChunk currentChunk;
-    public GameObject player;
+    public  Player player;
 
     public float gravity;
 
@@ -22,7 +22,7 @@ namespace LD38Runner {
     public float levelSpeed {
       get { return _levelSpeed; }
     }
-
+      
     // Use this for initialization
     void Start() {
       musicAudioSource.Play();
@@ -34,7 +34,7 @@ namespace LD38Runner {
       }
 
       nextChunk = Instantiate(chunkList.levelChunks[0].GetComponent<LevelChunk>());
-      player = GameObject.FindGameObjectWithTag("Player");
+      player    = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
       nextChunk.GetComponent<LevelChunk>().PositionAsGameStart();
 
       spawnNextChunk(selectNextChunk());
@@ -71,6 +71,18 @@ namespace LD38Runner {
       _levelSpeed = 0f;
       StartCoroutine(EventuallyChangeScene());
 
+    }
+
+    public float elapsedTime() {
+      return Time.time;
+    }
+
+    public int playersCurrentColor() {
+      return player.currentColor;
+    }
+
+    public Color[] playersColorArray() {
+      return player.colorArray;
     }
   }
 }

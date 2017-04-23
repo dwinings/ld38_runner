@@ -4,7 +4,7 @@
   <property name="end_height" value="11"/>
   <property name="height" value="20"/>
   <property name="start_height" value="11"/>
-  <property name="starting_x" value="6"/>
+  <property name="starting_x" value="12"/>
   <property name="width" value="100"/>
  </properties>
  <tileset firstgid="1" source="neon_tileset.tsx"/>

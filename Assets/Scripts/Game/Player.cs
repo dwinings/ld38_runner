@@ -12,7 +12,7 @@ namespace LD38Runner {
     public GameObject spriteHolder;
 
     private SpriteRenderer sr;
-    private int currentColor = 0;
+    public int currentColor = 0;
     public Color[] colorArray;
 
     public String[] colorMasks;
@@ -75,12 +75,12 @@ namespace LD38Runner {
 
     // Update is called once per frame
     public void Update() {
-      isGrounded = false;
+      isGrounded  = false;
       isCeilinged = false;
-      isWalled = false;
+      isWalled    = false;
 
       velocity -= GameManager._instance.gravity * Time.deltaTime;
-      velocity = Mathf.Clamp(velocity, TERMINAL_VELOCITY, 100);
+      velocity  = Mathf.Clamp(velocity, TERMINAL_VELOCITY, 100);
 
       performCollision();
       transform.Translate(0, velocity * Time.deltaTime, 0);
@@ -108,11 +108,14 @@ namespace LD38Runner {
 
     private void antiClockwiseColorChange() {
       currentColor--;
+      if (currentColor < 0) {
+        currentColor = colorArray.Length - 1;
+      }
       updateSpriteAndCollisionLayer();
     }
 
     private void updateSpriteAndCollisionLayer() {
-      sr.color = colorArray[Math.Abs(currentColor % colorArray.Length)];
+      sr.color = colorArray[currentColor % colorArray.Length];
       filter.layerMask = LayerMask.GetMask(colorMasks[currentColor % colorMasks.Length]);
     }
 
