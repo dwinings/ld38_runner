@@ -3,7 +3,7 @@
  <image source="../Viz/placeholder2.png" width="128" height="128"/>
  <tile id="0">
   <properties>
-   <property name="type" value="floor"/>
+   <property name="type" value="neon_floor"/>
   </properties>
  </tile>
 </tileset>
