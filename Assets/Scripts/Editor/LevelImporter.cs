@@ -225,7 +225,6 @@ namespace LD38Runner {
           EditorUtility.DisplayCancelableProgressBar("Regenerating Levels", string.Format("{0} - {1}/{2}", baseName, idx, total), (float)idx / (float)total);
           var level = ImportTMXLevel(levelFilePath);
           var prefab = PrefabUtility.CreateEmptyPrefab(CHUNK_PREFAB_OUTPUT_DIR + "/" + baseName + ".prefab");
-          var chunk = level.GetComponent<LevelChunk>();
           chunkList.levelChunks.Add(PrefabUtility.ReplacePrefab(level, prefab, ReplacePrefabOptions.ConnectToPrefab));
           UnityEngine.Object.DestroyImmediate(level);
         }

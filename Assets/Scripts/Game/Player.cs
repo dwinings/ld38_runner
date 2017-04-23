@@ -5,70 +5,48 @@ namespace LD38Runner {
   [RequireComponent(typeof(BoxCollider2D))]
   public class Player : MonoBehaviour {
     public float jumpStrength;
-    public float velocity = 0f;
-    private BoxCollider2D coll;
-    private BoxCollider2D[] overlapping = new BoxCollider2D[16];
-    private ContactFilter2D filter = new ContactFilter2D();
+    public float velocity;
+    private ContactFilter2D filter;
 
     public float deathThreshold = -100f;
     public GameObject spriteHolder;
 
-    private const float NEG_THREE_PI_OVER_4 = -3f * Mathf.PI / 4f;
-    private const float NEG_PI_OVER_4 = Mathf.PI / -4f;
-    private const float THREE_PI_OVER_4 = 3f * Mathf.PI / 4f;
-    private const float PI_OVER_4 = Mathf.PI / 4f;
+    private const float TERMINAL_VELOCITY = -40f;
     private bool isGrounded = false;
     private bool isCeilinged = false;
     private bool isWalled = false;
 
     private void performCollision() {
-      int hits = coll.OverlapCollider(filter, overlapping);
-      Vector2 incidence;
-      double angle;
-      for (int i = 0; i < hits; i++) {
-        incidence = (overlapping[i].transform.position - transform.position).normalized;
-        angle = Math.Atan2(incidence.y, incidence.x);
-        if (!isGrounded && floorBounds(angle)) {
+      float deltaX = GameManager._instance.levelSpeed*Time.deltaTime;
+      float deltaY = velocity*Time.deltaTime;
+      Vector2 trajectory = new Vector2(deltaX, deltaY);
+
+      // We can't die to these colliders.
+      var underfoot = Physics2D.Raycast(transform.position, Vector2.down, 0.6f, filter.layerMask);
+      var overhead = Physics2D.Raycast(transform.position, Vector2.up, 0.6f, filter.layerMask);
+
+      // This kills us if it's not at foot/head height and is not what we're standing on.
+      var hit = Physics2D.Raycast(transform.position - new Vector3(0.5f, 0.5f, 0f), trajectory, trajectory.magnitude, filter.layerMask);
+
+      if (hit.collider != null) {
+        if (velocity < 0 && floatEq(hit.point.y, hit.collider.bounds.max.y)) {
           isGrounded = true;
-          onGrounded(overlapping[i].transform);
-        } else if (!isCeilinged && ceilBounds(angle)) {
+          onGrounded(hit.collider.transform);
+        } else if (velocity > 0 &&  floatEq(hit.point.y, hit.collider.bounds.min.y)) {
           isCeilinged = true;
-          onCeiling(overlapping[i].transform);
-        }
-      }
-
-      // We check for wall collisions like this last, so that the ceiling/ground snapping will 
-      // happen before we check angles that can kill the player.
-
-      for (int i = 0; i < hits; i++) {
-        incidence = (overlapping[i].transform.position - transform.position).normalized;
-        angle = Math.Atan2(incidence.y, incidence.x);
-        if (!isWalled && wallBounds(angle)) {
+          onCeiling(hit.collider.transform);
+        } else if (hit.collider != underfoot && hit.collider != overhead) {
           isWalled = true;
-          onWall(overlapping[i].transform);
-          break;
+          onWall(hit.transform);
         }
       }
-    }
-
-    private bool floorBounds(double angle) {
-      return (angle > NEG_THREE_PI_OVER_4 && angle < NEG_PI_OVER_4);
-    }
-
-    private bool ceilBounds(double angle) {
-      return (angle < THREE_PI_OVER_4 && angle > PI_OVER_4);
-    }
-
-    private bool wallBounds(double angle) {
-      return (angle < NEG_THREE_PI_OVER_4 - 0.05f || angle > THREE_PI_OVER_4 + 0.05f);
     }
 
     private void onGrounded(Transform ground) {
-      if (Mathf.Abs(transform.position.y - ground.position.y) > 0.0001f) {
-        transform.position = new Vector2(transform.position.x, ground.position.y + 1);
+      if (!floatEq(ground.position.y + 1, transform.position.y)) {
+        transform.position = new Vector2(transform.position.x, ground.position.y+1);
       }
       velocity = 0;
-      maybeJump();
     }
 
     private void onCeiling(Transform ceiling) {
@@ -84,7 +62,6 @@ namespace LD38Runner {
 
     // Use this for initialization
     public void Start() {
-      coll = GetComponent<BoxCollider2D>();
       filter.layerMask = LayerMask.GetMask("Ground");
     }
 
@@ -93,12 +70,14 @@ namespace LD38Runner {
       isGrounded = false;
       isCeilinged = false;
       isWalled = false;
-      rotateLeft ();
 
-      velocity -= GameManager._instance.gravity;
-      velocity = Mathf.Clamp(velocity, -1, 9999);
+      velocity -= GameManager._instance.gravity * Time.deltaTime;
+      velocity = Mathf.Clamp(velocity, TERMINAL_VELOCITY, 100);
+
       performCollision();
-      transform.Translate(0, velocity, 0);
+      transform.Translate(0, velocity * Time.deltaTime, 0);
+
+      maybeJump();
 
       if (transform.position.y < deathThreshold) {
         die();
@@ -113,13 +92,13 @@ namespace LD38Runner {
     }
 
     private void maybeJump() {
-      if (Input.GetKeyDown(KeyCode.Space)) {
+      if (isGrounded && Input.GetKeyDown(KeyCode.Space)) {
         velocity += jumpStrength;
       }
     }
 
-    void rotateLeft() {
-      spriteHolder.transform.Rotate (Vector3.forward * 5);
+    private bool floatEq(float a, float b, float tolerance = 0.01f) {
+      return Mathf.Abs(a - b) < tolerance;
     }
   }
 }

@@ -13,7 +13,7 @@ namespace LD38Runner {
 
     public float gravity;
 
-    private float _levelSpeed = 0.2f;
+    private float _levelSpeed = 15f;
     public float levelSpeed {
       get { return _levelSpeed; }
     }

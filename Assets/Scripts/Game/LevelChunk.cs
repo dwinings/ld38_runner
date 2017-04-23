@@ -22,7 +22,7 @@ namespace LD38Runner {
 
     // Update is called once per frame
     public void Update() {
-      transform.Translate(GameManager._instance.levelSpeed, 0f, 0f);
+      transform.Translate(GameManager._instance.levelSpeed * Time.deltaTime, 0f, 0f);
     }
   }
 }
