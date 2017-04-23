@@ -11,6 +11,13 @@ namespace LD38Runner {
     public float deathThreshold = -100f;
     public GameObject spriteHolder;
 
+    private SpriteRenderer sr;
+    private int currentColor = 0;
+    public Color[] colorArray;
+
+    public String[] colorMasks;
+
+
     private const float TERMINAL_VELOCITY = -40f;
     private bool isGrounded = false;
     private bool isCeilinged = false;
@@ -62,7 +69,8 @@ namespace LD38Runner {
 
     // Use this for initialization
     public void Start() {
-      filter.layerMask = LayerMask.GetMask("Ground");
+      sr = spriteHolder.GetComponent<SpriteRenderer> ();
+      updateSpriteAndCollisionLayer();
     }
 
     // Update is called once per frame
@@ -78,10 +86,34 @@ namespace LD38Runner {
       transform.Translate(0, velocity * Time.deltaTime, 0);
 
       maybeJump();
+      maybeChangeColor ();
 
       if (transform.position.y < deathThreshold) {
         die();
       }
+    }
+
+    private void maybeChangeColor() {
+      if (Input.GetKeyDown(KeyCode.A)) {
+        antiClockwiseColorChange ();
+      } else if (Input.GetKeyDown(KeyCode.D)) {
+        clockwiseColorChange ();
+      }
+    }
+
+    private void clockwiseColorChange() {
+      currentColor++;
+      updateSpriteAndCollisionLayer();
+    }
+
+    private void antiClockwiseColorChange() {
+      currentColor--;
+      updateSpriteAndCollisionLayer();
+    }
+
+    private void updateSpriteAndCollisionLayer() {
+      sr.color = colorArray[Math.Abs(currentColor % colorArray.Length)];
+      filter.layerMask = LayerMask.GetMask(colorMasks[currentColor % colorMasks.Length]);
     }
 
     private void die() {
