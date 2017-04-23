@@ -136,4 +136,109 @@
    <property name="type" value="b_se"/>
   </properties>
  </tile>
+ <tile id="45">
+  <properties>
+   <property name="type" value="oj_hw"/>
+  </properties>
+ </tile>
+ <tile id="46">
+  <properties>
+   <property name="type" value="oj_hc"/>
+  </properties>
+ </tile>
+ <tile id="47">
+  <properties>
+   <property name="type" value="oj_he"/>
+  </properties>
+ </tile>
+ <tile id="48">
+  <properties>
+   <property name="type" value="m_hw"/>
+  </properties>
+ </tile>
+ <tile id="49">
+  <properties>
+   <property name="type" value="m_hc"/>
+  </properties>
+ </tile>
+ <tile id="50">
+  <properties>
+   <property name="type" value="m_he"/>
+  </properties>
+ </tile>
+ <tile id="51">
+  <properties>
+   <property name="type" value="b_hw"/>
+  </properties>
+ </tile>
+ <tile id="52">
+  <properties>
+   <property name="type" value="b_hc"/>
+  </properties>
+ </tile>
+ <tile id="53">
+  <properties>
+   <property name="type" value="b_he"/>
+  </properties>
+ </tile>
+ <tile id="60">
+  <properties>
+   <property name="type" value="oj_vn"/>
+  </properties>
+ </tile>
+ <tile id="61">
+  <properties>
+   <property name="type" value="oj_u"/>
+  </properties>
+ </tile>
+ <tile id="63">
+  <properties>
+   <property name="type" value="m_vn"/>
+  </properties>
+ </tile>
+ <tile id="64">
+  <properties>
+   <property name="type" value="m_u"/>
+  </properties>
+ </tile>
+ <tile id="66">
+  <properties>
+   <property name="type" value="b_vn"/>
+  </properties>
+ </tile>
+ <tile id="67">
+  <properties>
+   <property name="type" value="b_u"/>
+  </properties>
+ </tile>
+ <tile id="75">
+  <properties>
+   <property name="type" value="oj_vc"/>
+  </properties>
+ </tile>
+ <tile id="78">
+  <properties>
+   <property name="type" value="m_vc"/>
+  </properties>
+ </tile>
+ <tile id="81">
+  <properties>
+   <property name="type" value="b_vc"/>
+  </properties>
+ </tile>
+ <tile id="90">
+  <properties>
+   <property name="type" value="oj_vs"/>
+  </properties>
+ </tile>
+ <tile id="93">
+  <properties>
+   <property name="type" value="m_vs"/>
+  </properties>
+ </tile>
+ <tile id="96">
+  <properties>
+   <property name="type" value="b_vs"/>
+  </properties>
+ </tile>
 </tileset>
