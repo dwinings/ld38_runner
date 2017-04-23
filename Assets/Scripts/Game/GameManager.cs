@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace LD38Runner {
   public class GameManager : MonoBehaviour {
@@ -60,9 +61,16 @@ namespace LD38Runner {
       }
     }
 
+    IEnumerator EventuallyChangeScene() {
+      yield return new WaitForSeconds(2);
+      SceneManager.LoadScene(0);
+    }
+
     public void endMePlease() {
       sfxAudioSource.PlayOneShot(deathSound);
       _levelSpeed = 0f;
+      StartCoroutine(EventuallyChangeScene());
+
     }
   }
 }
