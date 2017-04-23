@@ -9,6 +9,10 @@ namespace LD38Runner {
     public AudioSource sfxAudioSource;
     public AudioClip deathSound;
     public LevelChunkList chunkList;
+
+    // This one is off camera to the right (+x axis)
+    private LevelChunk nextChunk;
+    private LevelChunk currentChunk;
     public GameObject player;
 
     public float gravity;
@@ -28,13 +32,32 @@ namespace LD38Runner {
         GameObject.DestroyImmediate(this);
       }
 
-      var chunk = Instantiate(chunkList.levelChunks[0]);
+      nextChunk = Instantiate(chunkList.levelChunks[0].GetComponent<LevelChunk>());
       player = GameObject.FindGameObjectWithTag("Player");
-      chunk.GetComponent<LevelChunk>().PositionAsGameStart();
+      nextChunk.GetComponent<LevelChunk>().PositionAsGameStart();
+
+      spawnNextChunk(selectNextChunk());
     }
 
-    void Update() {
-      //TODO: Write entire game.
+    bool isCurrentChunkOffscreen() {
+      return currentChunk.transform.position.x > 20;
+    }
+
+    LevelChunk selectNextChunk() {
+      return chunkList.levelChunks.Sample().GetComponent<LevelChunk>();
+    }
+
+    void spawnNextChunk(LevelChunk toBeSpawned) {
+        currentChunk = nextChunk;
+        nextChunk = Instantiate(nextChunk);
+        nextChunk.PositionAsNewChunk(currentChunk.transform.position.x, currentChunk.end_height);
+    }
+
+    void FixedUpdate() {
+      if (isCurrentChunkOffscreen()) {
+        Destroy(currentChunk.gameObject);
+        spawnNextChunk(selectNextChunk());
+      }
     }
 
     public void endMePlease() {

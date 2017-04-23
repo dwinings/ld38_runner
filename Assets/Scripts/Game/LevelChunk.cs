@@ -13,9 +13,13 @@ namespace LD38Runner {
     public const int PLAYER_DISPLAY_OFFSET = 5;
 
     public void PositionAsGameStart() {
+      PositionAsNewChunk(PLAYER_DISPLAY_OFFSET + starting_x, start_height);
+    }
+
+    public void PositionAsNewChunk(float x, float y) {
       transform.position = new Vector3(
-        -1*width + PLAYER_DISPLAY_OFFSET + starting_x,
-        height - start_height + 2,
+        -1 * width + x,
+        height - y + 2,
         0f
       );
     }
