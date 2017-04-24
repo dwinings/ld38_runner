@@ -39,13 +39,20 @@ namespace LD38Runner {
         if (velocity < 0 && floatEq(hit.point.y, hit.collider.bounds.max.y)) {
           isGrounded = true;
           onGrounded(hit.collider.transform);
-        } else if (velocity > 0 &&  floatEq(hit.point.y, hit.collider.bounds.min.y)) {
+        } else if (velocity > 0 && floatEq(hit.point.y, hit.collider.bounds.min.y)) {
           isCeilinged = true;
           onCeiling(hit.collider.transform);
-        } else if (hit.collider != underfoot && hit.collider != overhead) {
-          isWalled = true;
-          onWall(hit.transform);
         }
+      }
+
+      var adjustedTraj = new Vector2(deltaX, velocity * Time.deltaTime);
+      var adjHit = Physics2D.Raycast(transform.position - new Vector3(0.4999f, 0.4999f, 0f), adjustedTraj, adjustedTraj.magnitude, filter.layerMask);
+      if (adjHit.collider != null 
+        && (underfoot.collider == null || adjHit.collider.gameObject != underfoot.collider.gameObject)
+        && (overhead.collider  == null || adjHit.collider.gameObject !=  overhead.collider.gameObject)) 
+      {
+        isWalled = true;
+        onWall(hit.transform);
       }
     }
 
