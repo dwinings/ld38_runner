@@ -114,6 +114,7 @@ namespace LD38Runner {
       updateTimeAsColor(currentColor % colorArray.Length);
       currentColor++;
       updateSpriteAndCollisionLayer();
+      GameManager._instance.incPhaseCounter();
     }
 
     private void antiClockwiseColorChange() {
@@ -123,6 +124,7 @@ namespace LD38Runner {
         currentColor = colorArray.Length - 1;
       }
       updateSpriteAndCollisionLayer();
+      GameManager._instance.incPhaseCounter();
     }
 
     private void updateTimeAsColor(int currentColor) {

@@ -16,6 +16,8 @@ namespace LD38Runner {
     private LevelChunk currentChunk;
     private Player player;
 
+    private float startTime;
+
     public float gravity;
 
     private float _levelSpeed = 8f;
@@ -45,6 +47,7 @@ namespace LD38Runner {
 
     //Stats Variables;
     public int timesJumped = 0;
+    public int phaseCounter = 0;
     public float oTime     = 0;
     public float mTime     = 0;
     public float bTime     = 0;
@@ -55,7 +58,7 @@ namespace LD38Runner {
     void Start() {
       musicAudioSource.Play();
 
-      mainUIScale ();
+      ActivateGameUI();
 
       if (!_instance) {
         _instance = this;
@@ -97,26 +100,31 @@ namespace LD38Runner {
     }
 
     public void endMePlease() {
-      deathTime = Time.time;
-      deathUIScale();
+      deathTime = ElapsedTime;
+      ActivateDeathUI();
       _levelSpeed = 0f;
       sfxAudioSource.PlayOneShot(deathSound);
-      StartCoroutine(EventuallyChangeScene());
-
     }
 
-    public void mainUIScale() {
-      MainUI.transform.localScale  = new Vector3( 1f, 1f, 1f);
-      DeathUI.transform.localScale = new Vector3( 0f, 1f, 1f);
+    public void rebirth() {
     }
 
-    public void deathUIScale() {
-      MainUI.transform.localScale  = new Vector3( 0f, 1f, 1f);
-      DeathUI.transform.localScale = new Vector3( 1f, 1f, 1f);
+    public void ActivateGameUI() {
+      // HACK
+      startTime = Time.time;
+
+      MainUI.SetActive(true);
+      DeathUI.SetActive(false);
     }
 
-    public float elapsedTime() {
-      return Time.time;
+    public void ActivateDeathUI() {
+      MainUI.SetActive(false);
+      DeathUI.SetActive(true);
+      DeathUI.GetComponent<DeathUI>().Populate();
+    }
+
+    public float ElapsedTime {
+      get {return Time.time - startTime;}
     }
 
     public int playersCurrentColor() {
@@ -140,9 +148,13 @@ namespace LD38Runner {
         mTime  += time;
         break;
       case 2:
-        mTime  += time;
+        bTime  += time;
         break;
       }
+    }
+
+    public void incPhaseCounter() {
+      phaseCounter++;
     }
   }
 }
