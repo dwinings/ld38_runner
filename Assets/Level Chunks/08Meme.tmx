@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.0" orientation="orthogonal" renderorder="right-down" width="100" height="20" tilewidth="128" tileheight="128" nextobjectid="1">
  <properties>
-  <property name="end_height" value="10"/>
+  <property name="end_height" value="8"/>
   <property name="height" value="20"/>
-  <property name="start_height" value="10"/>
+  <property name="start_height" value="8"/>
   <property name="starting_x" value="1"/>
   <property name="width" value="100"/>
  </properties>
