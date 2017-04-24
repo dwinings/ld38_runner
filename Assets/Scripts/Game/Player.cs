@@ -6,6 +6,7 @@ namespace LD38Runner {
   public class Player : MonoBehaviour {
     public float jumpStrength;
     public float velocity;
+    public float rotationSpeed;
     private ContactFilter2D filter;
 
     public GameObject spriteHolder;
@@ -98,6 +99,7 @@ namespace LD38Runner {
 
       performCollision();
       transform.Translate(0, velocity * Time.deltaTime, 0);
+      GetComponentInChildren<SpriteRenderer>().transform.Rotate(Vector3.forward, rotationSpeed * Time.deltaTime);
 
       maybeJump();
       maybeChangeColor ();
@@ -140,7 +142,11 @@ namespace LD38Runner {
     }
 
     private void updateSpriteAndCollisionLayer() {
-      sr.color = colorArray[currentColor % colorArray.Length];
+      var party = GetComponentInChildren<ParticleSystem>();
+      var main = party.main;
+      main.startColor = colorArray[currentColor%colorArray.Length];
+    
+      // sr.color = colorArray[currentColor % colorArray.Length];
       filter.layerMask = LayerMask.GetMask(colorMasks[currentColor % colorMasks.Length]);
     }
 
