@@ -103,7 +103,7 @@
  </tile>
  <tile id="32">
   <properties>
-   <property name="type" value="oj_sw"/>
+   <property name="type" value="oj_se"/>
   </properties>
  </tile>
  <tile id="33">

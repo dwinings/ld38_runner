@@ -17,7 +17,7 @@ namespace LD38Runner {
 
     public String[] colorMasks;
 
-
+    private float lastColorSwitchTime;
     private const float TERMINAL_VELOCITY = -40f;
     private bool isGrounded = false;
     private bool isCeilinged = false;
@@ -76,6 +76,7 @@ namespace LD38Runner {
 
     // Use this for initialization
     public void Start() {
+      lastColorSwitchTime = (float)Time.time;
       sr = spriteHolder.GetComponent<SpriteRenderer> ();
       updateSpriteAndCollisionLayer();
     }
@@ -98,6 +99,7 @@ namespace LD38Runner {
       if (transform.position.y < deathThreshold) {
         die();
       }
+
     }
 
     private void maybeChangeColor() {
@@ -109,16 +111,24 @@ namespace LD38Runner {
     }
 
     private void clockwiseColorChange() {
+      updateTimeAsColor(currentColor % colorArray.Length);
       currentColor++;
       updateSpriteAndCollisionLayer();
     }
 
     private void antiClockwiseColorChange() {
+      updateTimeAsColor(currentColor % colorArray.Length);
       currentColor--;
       if (currentColor < 0) {
         currentColor = colorArray.Length - 1;
       }
       updateSpriteAndCollisionLayer();
+    }
+
+    private void updateTimeAsColor(int currentColor) {
+      float now = (float)Time.time;
+      GameManager._instance.increaseColorTimer(currentColor, now - lastColorSwitchTime);
+      lastColorSwitchTime = now;
     }
 
     private void updateSpriteAndCollisionLayer() {
@@ -127,6 +137,7 @@ namespace LD38Runner {
     }
 
     private void die() {
+      updateTimeAsColor(currentColor % colorArray.Length);
       GameManager._instance.endMePlease();
       // Pls no destroy camera ty
       GetComponentInChildren<Camera>().gameObject.transform.SetParent(null, true);
@@ -135,6 +146,7 @@ namespace LD38Runner {
 
     private void maybeJump() {
       if (isGrounded && Input.GetKeyDown(KeyCode.Space)) {
+        GameManager._instance.increaseJumpCounter();
         velocity += jumpStrength;
       }
     }
