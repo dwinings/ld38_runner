@@ -21,10 +21,11 @@ namespace LD38Runner {
     private Player player;
 
     private float startTime;
-
+    public int chunkIndex;
+    public int introChunkAmnt;
     public float gravity;
 
-    private float _levelSpeed = 8f;
+    private float _levelSpeed = 15f;
     public  float levelSpeed {
       get { return _levelSpeed; }
     }
@@ -70,7 +71,7 @@ namespace LD38Runner {
         GameObject.DestroyImmediate(this);
       }
 
-      nextChunk = Instantiate(chunkList.levelChunks[0].GetComponent<LevelChunk>());
+      nextChunk = Instantiate(selectNextChunk().GetComponent<LevelChunk>());
       player    = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
       nextChunk.GetComponent<LevelChunk>().PositionAsGameStart();
 
@@ -87,12 +88,18 @@ namespace LD38Runner {
     }
 
     LevelChunk selectNextChunk() {
-      return chunkList.levelChunks.Sample().GetComponent<LevelChunk>();
+      if (chunkIndex < introChunkAmnt) {
+        LevelChunk nextChunk = chunkList.levelChunks[chunkIndex].GetComponent<LevelChunk> ();
+        chunkIndex++;
+        return nextChunk;       
+      } else {
+        return chunkList.levelChunks.Sample().GetComponent<LevelChunk>();
+      }
     }
 
     void spawnNextChunk(LevelChunk toBeSpawned) {
       currentChunk = nextChunk;
-      nextChunk = Instantiate(nextChunk);
+      nextChunk = Instantiate(toBeSpawned);
       nextChunk.PositionAsNewChunk(currentChunk.transform.position.x, currentChunk.end_height);
     }
 
