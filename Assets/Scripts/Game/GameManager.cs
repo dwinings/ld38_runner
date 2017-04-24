@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -12,8 +13,10 @@ namespace LD38Runner {
     public LevelChunkList chunkList;
 
     // This one is off camera to the right (+x axis)
-    private LevelChunk nextChunk;
-    private LevelChunk currentChunk;
+    [NonSerialized]
+    public LevelChunk nextChunk;
+    [NonSerialized]
+    public LevelChunk currentChunk;
     private Player player;
 
     private float startTime;

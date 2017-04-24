@@ -8,7 +8,6 @@ namespace LD38Runner {
     public float velocity;
     private ContactFilter2D filter;
 
-    public float deathThreshold = -100f;
     public GameObject spriteHolder;
 
     private SpriteRenderer sr;
@@ -103,7 +102,7 @@ namespace LD38Runner {
       maybeJump();
       maybeChangeColor ();
 
-      if (transform.position.y < deathThreshold) {
+      if (transform.position.y < GameManager._instance.currentChunk.start_height - GameManager._instance.currentChunk.height - 10f) {
         die();
       }
 
@@ -149,7 +148,10 @@ namespace LD38Runner {
       updateTimeAsColor(currentColor % colorArray.Length);
       GameManager._instance.endMePlease();
       // Pls no destroy camera ty
-      GetComponentInChildren<Camera>().gameObject.transform.SetParent(null, true);
+      var cam = GetComponentInChildren<Camera>();
+      cam.gameObject.transform.SetParent(null, true);
+      // pce out thx
+      cam.transform.position = new Vector3(999f, 999f, -10f);
       Destroy(this.gameObject);
     }
 
