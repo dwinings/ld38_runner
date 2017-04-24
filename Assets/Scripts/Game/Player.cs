@@ -60,7 +60,7 @@ namespace LD38Runner {
       }
 
       // HACK
-      if ((underfoot.collider && underfoot.collider.gameObject.GetComponent<Spike>()) || (overhead.collider && overhead.collider.gameObject.GetComponent<Spike>())) {
+      if (underfoot.collider && underfoot.collider.gameObject.GetComponent<Spike>()) {
         die();
       }
     }
