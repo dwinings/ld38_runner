@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: 7cd2d16a398aa8f47878bd8f16d1d1af
-timeCreated: 1492967966
+timeCreated: 1493043377
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -52,6 +52,15 @@ TextureImporter:
     21300090: ld38_spritesheet_45
     21300092: ld38_spritesheet_46
     21300094: ld38_spritesheet_47
+    21300096: ld38_spritesheet_48
+    21300098: ld38_spritesheet_49
+    21300100: ld38_spritesheet_50
+    21300102: ld38_spritesheet_51
+    21300104: ld38_spritesheet_52
+    21300106: ld38_spritesheet_53
+    21300108: ld38_spritesheet_54
+    21300110: ld38_spritesheet_55
+    21300112: ld38_spritesheet_56
   serializedVersion: 4
   mipmaps:
     mipMapMode: 0
@@ -688,7 +697,7 @@ TextureImporter:
       name: ld38_spritesheet_43
       rect:
         serializedVersion: 2
-        x: 384
+        x: 128
         y: 1152
         width: 128
         height: 128
@@ -701,7 +710,7 @@ TextureImporter:
       name: ld38_spritesheet_44
       rect:
         serializedVersion: 2
-        x: 768
+        x: 256
         y: 1152
         width: 128
         height: 128
@@ -714,6 +723,71 @@ TextureImporter:
       name: ld38_spritesheet_45
       rect:
         serializedVersion: 2
+        x: 384
+        y: 1152
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: ld38_spritesheet_46
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 1152
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: ld38_spritesheet_47
+      rect:
+        serializedVersion: 2
+        x: 640
+        y: 1152
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: ld38_spritesheet_48
+      rect:
+        serializedVersion: 2
+        x: 768
+        y: 1152
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: ld38_spritesheet_49
+      rect:
+        serializedVersion: 2
+        x: 896
+        y: 1152
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: ld38_spritesheet_50
+      rect:
+        serializedVersion: 2
         x: 0
         y: 1024
         width: 128
@@ -724,7 +798,33 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: ld38_spritesheet_46
+      name: ld38_spritesheet_51
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 1024
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: ld38_spritesheet_52
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 1024
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: ld38_spritesheet_53
       rect:
         serializedVersion: 2
         x: 384
@@ -737,10 +837,36 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: ld38_spritesheet_47
+      name: ld38_spritesheet_54
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 1024
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: ld38_spritesheet_55
       rect:
         serializedVersion: 2
         x: 768
+        y: 1024
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: ld38_spritesheet_56
+      rect:
+        serializedVersion: 2
+        x: 896
         y: 1024
         width: 128
         height: 128

@@ -23,6 +23,8 @@ namespace LD38Runner {
     private bool isCeilinged = false;
     private bool isWalled = false;
 
+
+
     private void performCollision() {
       float deltaX = GameManager._instance.levelSpeed*Time.deltaTime;
       float deltaY = velocity*Time.deltaTime;
@@ -53,6 +55,11 @@ namespace LD38Runner {
       {
         isWalled = true;
         onWall(hit.transform);
+      }
+
+      // HACK
+      if ((underfoot.collider && underfoot.collider.gameObject.GetComponent<Spike>()) || (overhead.collider && overhead.collider.gameObject.GetComponent<Spike>())) {
+        die();
       }
     }
 

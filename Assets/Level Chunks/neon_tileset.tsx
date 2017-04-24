@@ -216,9 +216,19 @@
    <property name="type" value="oj_vc"/>
   </properties>
  </tile>
+ <tile id="76">
+  <properties>
+   <property name="type" value="oj_spike"/>
+  </properties>
+ </tile>
  <tile id="78">
   <properties>
    <property name="type" value="m_vc"/>
+  </properties>
+ </tile>
+ <tile id="79">
+  <properties>
+   <property name="type" value="m_spike"/>
   </properties>
  </tile>
  <tile id="81">
@@ -226,9 +236,19 @@
    <property name="type" value="b_vc"/>
   </properties>
  </tile>
+ <tile id="82">
+  <properties>
+   <property name="type" value="b_spike"/>
+  </properties>
+ </tile>
  <tile id="90">
   <properties>
    <property name="type" value="oj_vs"/>
+  </properties>
+ </tile>
+ <tile id="91">
+  <properties>
+   <property name="type" value="oj_laser"/>
   </properties>
  </tile>
  <tile id="93">
@@ -236,9 +256,19 @@
    <property name="type" value="m_vs"/>
   </properties>
  </tile>
+ <tile id="94">
+  <properties>
+   <property name="type" value="m_laser"/>
+  </properties>
+ </tile>
  <tile id="96">
   <properties>
    <property name="type" value="b_vs"/>
+  </properties>
+ </tile>
+ <tile id="97">
+  <properties>
+   <property name="type" value="b_laser"/>
   </properties>
  </tile>
 </tileset>
