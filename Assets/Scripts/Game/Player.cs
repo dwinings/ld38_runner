@@ -23,6 +23,8 @@ namespace LD38Runner {
     private bool isCeilinged = false;
     private bool isWalled = false;
 
+    public AudioClip jumpSound;
+    public AudioClip landSound;
 
 
     private void performCollision() {
@@ -66,6 +68,9 @@ namespace LD38Runner {
     private void onGrounded(Transform ground) {
       if (!floatEq(ground.position.y + 1, transform.position.y)) {
         transform.position = new Vector2(transform.position.x, ground.position.y+1);
+      }
+      if (velocity < -5) {
+        GameManager._instance.sfxAudioSource.PlayOneShot(landSound); 
       }
       velocity = 0;
     }
@@ -164,6 +169,7 @@ namespace LD38Runner {
     private void maybeJump() {
       if (isGrounded && Input.GetKeyDown(KeyCode.Space)) {
         GameManager._instance.increaseJumpCounter();
+        GameManager._instance.sfxAudioSource.PlayOneShot(jumpSound);
         velocity += jumpStrength;
       }
     }

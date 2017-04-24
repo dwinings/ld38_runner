@@ -10,6 +10,7 @@ namespace LD38Runner {
     public AudioSource musicAudioSource;
     public AudioSource sfxAudioSource;
     public AudioClip   deathSound;
+    public AudioClip gameMusic;
     public LevelChunkList chunkList;
 
     // This one is off camera to the right (+x axis)
@@ -74,6 +75,11 @@ namespace LD38Runner {
       nextChunk.GetComponent<LevelChunk>().PositionAsGameStart();
 
       spawnNextChunk(selectNextChunk());
+
+      musicAudioSource.clip = gameMusic;
+      musicAudioSource.time = 101.35f;
+      musicAudioSource.loop = true;
+      musicAudioSource.Play();
     }
 
     bool isCurrentChunkOffscreen() {
