@@ -70,7 +70,7 @@ namespace LD38Runner {
         transform.position = new Vector2(transform.position.x, ground.position.y+1);
       }
       if (velocity < -5) {
-        GameManager._instance.sfxAudioSource.PlayOneShot(landSound); 
+        //GameManager._instance.sfxAudioSource.PlayOneShot(landSound); 
       }
       velocity = 0;
     }
